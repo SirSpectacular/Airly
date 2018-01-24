@@ -12,8 +12,8 @@ public class Main {
 
         String apiKey = null;
 
-        if (System.getenv().get("API_KEY") != null)
-            apiKey = System.getenv().get("API_KEY");
+        if (System.getenv("API_KEY") != null)
+            apiKey = System.getenv("API_KEY");
 
         if (optionParser.getParsedApiKey() != null)
             apiKey = optionParser.getParsedApiKey();
@@ -34,7 +34,7 @@ public class Main {
                 }
                 case "sensor": {
                     output = Connector.getResponse(
-                            new URL("https://airapi.airly.eu/v1/sensor/measurements?sensorid=" + optionParser.getSensorId()),
+                            new URL("https://airapi.airly.eu/v1/sensor/measurements?sensorId=" + optionParser.getSensorId()),
                             apiKey);
                     break;
                 }
