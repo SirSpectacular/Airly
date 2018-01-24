@@ -1,10 +1,12 @@
 public class History {
     private String tillDateTime;
     private String fromDateTime;
-    private MeasurementDetails measurments;
+    private MeasurementDetails measurements;
+
+    private History(){}
 
     public MeasurementDetails getMeasurments() {
-        return measurments;
+        return measurements;
     }
 
     public String getFromDateTime() {
@@ -15,5 +17,3 @@ public class History {
         return tillDateTime;
     }
 }
-
-//https://github.com/malysz/OOP-Proj2/blob/master/src/main/agh/cs/proj2/CurrentMeasurements.java

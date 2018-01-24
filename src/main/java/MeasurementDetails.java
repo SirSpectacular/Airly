@@ -1,3 +1,7 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MeasurementDetails {
     private double airQualityIndex;
     private double humidity;
@@ -6,18 +10,8 @@ public class MeasurementDetails {
     private double pm10;
     private double pressure;
     private double temperature;
-    private int pollutionLevel;
 
-    public MeasurementDetails(double airQualityIndex, double humidity, double pm1, double pm25, double pm10, double pressure, double temperature, int pollutionLevel){
-        this.airQualityIndex = airQualityIndex;
-        this.humidity = humidity;
-        this.pm1 = pm1;
-        this.pm25 = pm25;
-        this.pm10 = pm10;
-        this.pressure = pressure;
-        this.temperature = temperature;
-        this.pollutionLevel = pollutionLevel;
-    }
+    private MeasurementDetails(){}
 
     public double getAirQualityIndex(){
         return airQualityIndex;
@@ -45,9 +39,5 @@ public class MeasurementDetails {
 
     public double getTemperature(){
         return temperature;
-    }
-
-    public int getPollutionLevel(){
-        return pollutionLevel;
     }
 }

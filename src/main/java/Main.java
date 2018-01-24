@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+
+import java.io.IOException;
 import java.net.URL;
 
 public class Main {
@@ -19,34 +22,27 @@ public class Main {
             System.out.println("You forgot to parse API key or state it in environmental variable");
             System.exit(1);
         }
-        switch (optionParser.getMode()) {
-            case "mapPoint": {
-                try {
-                    String outputJson = Connector.getResponse(new URL(
-                            "https://airapi.airly.eu/v1/mapPoint/measurements" +
-                                    "?latitude=" + optionParser.getLatitude() +
-                                    "&longitude=" + optionParser.getLongitude()),
-                            apiKey);
+        String output = null;
+        try {
+            switch (optionParser.getMode()) {
+                case "mapPoint": {
 
-                    System.out.println(outputJson);
-                } catch (Exception e) {
-                    System.out.println("here" + e.getMessage());
+                    output = Connector.getResponse(
+                            new URL("https://airapi.airly.eu/v1/mapPoint/measurements?latitude=" + optionParser.getLatitude() + "&longitude=" + optionParser.getLongitude()),
+                            apiKey);
+                    break;
+                }
+                case "sensor": {
+                    output = Connector.getResponse(
+                            new URL("https://airapi.airly.eu/v1/sensor/measurements?sensorid=" + optionParser.getSensorId()),
+                            apiKey);
+                    break;
                 }
             }
-
-            case "sensor": {
-                try {
-                    String out = Connector.getResponse(new URL(
-                            "https://airapi.airly.eu/v1/sensor/measurements" +
-                                    "?sensorid=" + optionParser.getSensorId()),
-                            apiKey);
-
-                    System.out.println(out);
-                } catch (Exception e) {
-                    System.out.println("here" + e.getMessage());
-                }
-
-            }
+            Measurements measurements = new Gson().fromJson(output, Measurements.class);
+            new Viewer(measurements).print(optionParser.getShowHistory());
+        } catch (IOException e) {
+            System.out.println("Something went wrong while program was trying to get data from the server");
         }
     }
 }

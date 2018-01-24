@@ -19,7 +19,8 @@ public class OptionParser {
                     latitude == null &&
                     sensorId != null)
                 mode = "sensor";
-            throw new ParameterException("");
+            else
+                throw new ParameterException("");
 
         } catch (ParameterException ex) {
             System.out.println("Given parameters were incorrect");
